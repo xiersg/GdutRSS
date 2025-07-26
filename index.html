@@ -278,7 +278,7 @@
     <script>
         // 加载并渲染index.md文件
         function loadAndRenderMarkdown() {
-            fetch('index.md')
+            fetch('/index.md')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('无法加载index.md文件');
