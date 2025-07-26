@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  {% include head.html %}
+</head>
+<body class="reader-{{ site.reader.default_theme }}">
+  {% include header.html %}
+  
+  <div class="reader-container">
+    <header class="reader-header">
+      <button id="sidebar-toggle" aria-label="目录菜单">☰</button>
+      <h1>{{ page.title }}</h1>
+      <div class="reader-controls">
+        <button id="font-increase" aria-label="增大字体">A+</button>
+        <button id="font-reset" aria-label="重置字体">A</button>
+        <button id="font-decrease" aria-label="减小字体">A-</button>
+        <button id="theme-toggle" aria-label="切换主题">🌙</button>
+      </div>
+    </header>
+    
+    <main class="reader-content">
+      {{ content }}
+    </main>
+    
+    <footer class="reader-footer">
+      <div class="navigation">
+        {% if page.previous %}
+          <a href="{{ page.previous.url | relative_url }}" class="prev-btn">← {{ page.previous.title }}</a>
+        {% endif %}
+        <a href="{{ '/' | relative_url }}" class="home-btn">首页</a>
+        {% if page.next %}
+          <a href="{{ page.next.url | relative_url }}" class="next-btn">{{ page.next.title }} →</a>
+        {% endif %}
+      </div>
+    </footer>
+  </div>
+  
+  <aside id="sidebar" class="reader-sidebar">
+    <div class="sidebar-content">
+      {% include toc.html html=content %}
+    </div>
+  </aside>
+  
+  {% include footer.html %}
+  <script src="{{ '/assets/js/reader.js' | relative_url }}" defer></script>
+</body>
+</html>

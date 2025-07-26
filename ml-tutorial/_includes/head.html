@@ -1,0 +1,21 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title }} | {{ site.title }}</title>
+<link rel="stylesheet" href="{{ '/assets/css/reader.css' | relative_url }}">
+{% feed_meta %}
+{% seo %}
+<script>
+  // 初始化主题设置
+  document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('reader-theme');
+    const savedFontSize = localStorage.getItem('reader-font-size');
+    
+    if (savedTheme) {
+      document.body.className = `reader-${savedTheme}`;
+    }
+    
+    if (savedFontSize) {
+      document.documentElement.style.setProperty('--base-font-size', savedFontSize);
+    }
+  });
+</script>
