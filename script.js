@@ -120,3 +120,28 @@ function generateNavFromGitHubData(data) {
         }
     }).join('');
 }
+
+// 处理 Markdown 中的图片路径
+function processMarkdownImages(markdownContent, currentFilePath) {
+    // 获取当前文件所在目录的路径（去掉文件名部分）
+    const basePath = currentFilePath.substring(0, currentFilePath.lastIndexOf('/')); // 获取当前文件的目录路径
+
+    // 使用正则表达式匹配 Markdown 中的图片路径
+    const imageRegex = /!\[([^\]]+)\]\(([^)]+)\)/g;
+
+    // 替换图片路径
+    return markdownContent.replace(imageRegex, function(match, altText, imagePath) {
+        // 如果图片路径是相对路径，拼接当前文件的目录路径
+        let fullImagePath = imagePath;
+
+        // 检查图片路径是否是相对路径（没有 `http` 或 `https` 开头）
+        if (!imagePath.startsWith('http') && !imagePath.startsWith('https')) {
+            // 拼接当前 Markdown 文件所在目录的路径和图片路径
+            fullImagePath = basePath + '/' + imagePath;
+        }
+
+        // 返回修改后的 HTML
+        return `![${altText}](${fullImagePath})`;
+    });
+}
+
