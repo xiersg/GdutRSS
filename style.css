@@ -34,7 +34,7 @@ footer {
 
 /* Markdown 内容区域 */
 #content {
-    margin-left: 300px;         /* 留出左侧目录空间 */
+    margin-left: 12%;         /* 留出左侧目录空间 */
     padding: 20px;              /* 内容内边距 */
     flex-grow: 1;               /* 在 Flexbox 中扩展以填充剩余空间 */
     max-width: 100%;            /* 最大宽度 100% */
@@ -63,14 +63,16 @@ footer {
 
 /* 目录栏样式 */
 #navigation {
-    width: 250px; /* 固定宽度 */
+    width: 10%;
     padding: 10px;
     position: fixed;
     height: 100%;
-    top: 30px;  /* 目录栏从工具栏下面开始 */
+    top: 50px;
     left: 0;
     box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
+    overflow-x: auto;  /* 加上这个，启用横向滚动 */
+    white-space: nowrap; /* 防止子元素换行 */
 }
 
 /* 目录项的样式 */
