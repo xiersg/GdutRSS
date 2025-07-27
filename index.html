@@ -4,33 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Markdown 阅读器</title>
-    <link rel="stylesheet" href="style.css"> <!-- 引入样式 -->
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- Markdown 转换库 -->
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Markdown 阅读器</h1>
-            <button id="toggle-night-mode">切换夜间模式</button> <!-- 夜间模式切换按钮 -->
-        </header>
+    <header>
+        <h1>Markdown 阅读器</h1>
+        <button id="toggle-night-mode">切换夜间模式</button>
+    </header>
 
-        <div class="content-container">
-            <aside id="navigation">
-                <h2>目录</h2>
-                <ul id="directory-list"></ul>  <!-- 目录列表 -->
-            </aside>
+    <div class="content-container">
+        <aside id="navigation">
+            <h2>目录</h2>
+            <ul id="directory-list">
+                <!-- 目录内容会通过 JS 动态生成 -->
+            </ul>
+        </aside>
 
-            <main>
-                <div id="content" class="content">
-                    <div class="loader">加载中...</div>
-                </div>
-            </main>
-        </div>
+        <!-- 分隔条 -->
+        <div id="resizer" class="resizer"></div>
 
-        <footer>
-            <p>Markdown 阅读器 | GitHub Pages 示例</p>
-        </footer>
+        <main id="content">
+            <!-- 这里加载 Markdown 内容 -->
+        </main>
     </div>
+
+    <footer>
+        <p>Markdown 阅读器 | GitHub Pages 示例</p>
+    </footer>
+</div>
 
     <script src="script.js"></script> <!-- 引入脚本 -->
 </body>

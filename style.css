@@ -1,109 +1,201 @@
-/* 样式文件 */
+/* 基本样式 */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333;
     margin: 0;
     padding: 0;
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-footer {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 0.9em;
-}
-
-.content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.loader {
-    text-align: center;
-    font-size: 1.2em;
-}
-
-/* 日间模式 */
-body {
-    font-family: Arial, sans-serif;
-    background-color: white;
-    color: #333;
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-footer {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 0.9em;
-}
-
-.content-container {
     display: flex;
 }
 
-#navigation {
-    width: 200px;
-    padding-right: 20px;
+/* 整个页面容器 */
+.container {
+    max-width: 1200px;  /* 最大宽度 */
+    margin: 0 auto;
+    width: 100%;
+    padding: 20px;
 }
 
-.content {
-    flex: 1;
-    background-color: white;
+/* 页头 */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 页脚 */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+/* Markdown 内容区域 */
+#content {
+    margin: 0 auto;
     padding: 20px;
+    background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px;  /* 最大宽度 */
+    width: 100%;
 }
 
-.loader {
-    text-align: center;
-    font-size: 1.2em;
+/* 目录栏样式 */
+.content-container {
+    display: flex;
+    width: 100%;
+    height: 100vh; /* 让容器充满屏幕高度 */
 }
 
-/* 夜间模式 */
+/* 目录栏样式 */
+#navigation {
+    width: 250px; /* 固定宽度 */
+    padding: 10px;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+
+/* 分隔条样式 */
+.resizer {
+    background-color: #aaa;  /* 适中的颜色 */
+    cursor: ew-resize;  /* 左右拖动光标 */
+    width: 10px; /* 分隔条的宽度 */
+    height: 100%;
+}
+
+/* 目录项样式 */
+.directory-item {
+    cursor: pointer;
+    font-weight: bold;
+    margin: 5px 0;
+    color: rgb(212, 212, 212); /* 确保在夜间模式下文字清晰 */
+}
+
+.directory-item:hover {
+    color: #007BFF;  /* 鼠标悬停时的目录项颜色 */
+}
+/* 展开子目录 */
+.subdirectory {
+    padding-left: 20px;
+    list-style-type: none;
+    display: none;  /* 默认隐藏子目录 */
+}
+
+.subdirectory li {
+    margin: 5px 0;
+}
+
+/* 主体布局 */
+#content {
+    margin-left: 270px; /* 留出左侧目录空间 */
+    padding: 20px;
+    flex-grow: 1;
+}
+
+/* 夜间模式样式 */
 body.night-mode {
-    background-color: #121212;
-    color: #f1f1f1;
+    background-color: rgb(30, 30, 30);  /* 稍微亮一点的深灰色背景 */
+    color: rgb(112, 112, 112);  /* 更亮的文字颜色 */
 }
 
 body.night-mode .content {
-    background-color: #333;
+    background-color: rgb(45, 45, 45);  /* 更温和的内容区背景 */
+    color: rgb(212, 212, 212);  /* 内容区域文字颜色 */
 }
 
 body.night-mode #navigation {
-    background-color: #1a1a1a;
-    color: #f1f1f1;
+    background-color: rgb(40, 40, 40);  /* 更温和的导航栏背景色 */
+    color: rgb(212, 212, 212);  /* 导航栏文字颜色 */
 }
 
 body.night-mode button {
-    background-color: #444;
-    color: #fff;
+    background-color: rgb(58, 61, 65);  /* 按钮背景色 */
+    color: rgb(212, 212, 212);  /* 按钮文字颜色 */
+    border: 1px solid rgb(58, 61, 65);  /* 按钮边框颜色 */
+    padding: 10px 15px;
+    border-radius: 4px;
 }
 
 body.night-mode button:hover {
-    background-color: #666;
+    background-color: rgb(77, 77, 79);  /* 鼠标悬停时的按钮背景色 */
+    border-color: rgb(77, 77, 79);  /* 鼠标悬停时的按钮边框颜色 */
 }
 
+body.night-mode button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);  /* 按钮聚焦时的光晕效果 */
+}
+
+body.night-mode a {
+    color: rgb(100, 149, 237);  /* 设置链接颜色为亮蓝色 */
+    text-decoration: none;  /* 移除下划线 */
+}
+
+body.night-mode a:hover {
+    color: rgb(70, 130, 180);  /* 鼠标悬停时改变链接颜色 */
+    text-decoration: underline;  /* 鼠标悬停时添加下划线 */
+}
+
+body.night-mode a:visited {
+    color: rgb(138, 138, 255);  /* 设置已访问链接的颜色 */
+}
+
+
+
+
+
+
+/* 白天模式样式 */
+body {
+    background-color: rgb(240, 240, 240);  /* 浅灰色背景 */
+    color: rgb(30, 30, 30);  /* 深色文字 */
+}
+
+body .content {
+    background-color: rgb(255, 255, 255);  /* 白色内容区背景 */
+    color: rgb(30, 30, 30);  /* 内容区域深色文字 */
+}
+
+body #navigation {
+    background-color: rgb(245, 245, 245);  /* 浅灰色导航栏背景 */
+    color: rgb(30, 30, 30);  /* 导航栏文字颜色 */
+}
+
+body button {
+    background-color: rgb(58, 61, 65);  /* 按钮背景色 */
+    color: rgb(212, 212, 212);  /* 按钮文字颜色 */
+    border: 1px solid rgb(58, 61, 65);  /* 按钮边框颜色 */
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+
+body button:hover {
+    background-color: rgb(77, 77, 79);  /* 鼠标悬停时的按钮背景色 */
+    border-color: rgb(77, 77, 79);  /* 鼠标悬停时的按钮边框颜色 */
+}
+
+body button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);  /* 按钮聚焦时的光晕效果 */
+}
+
+/* 白天模式链接颜色 */
+body a {
+    color: rgb(0, 123, 255);  /* 设置链接颜色为蓝色 */
+    text-decoration: none;  /* 移除下划线 */
+}
+
+body a:hover {
+    color: rgb(0, 105, 217);  /* 鼠标悬停时改变链接颜色 */
+    text-decoration: underline;  /* 鼠标悬停时添加下划线 */
+}
+
+body a:visited {
+    color: rgb(138, 138, 255);  /* 设置已访问链接的颜色 */
+}
 
