@@ -115,19 +115,23 @@ function loadMarkdown(filePath) {
 
 
 // 获取并渲染目录
-function renderDirectoryNavigation() {
+async function renderDirectoryNavigation() {
     const owner = 'xiersg';  // 你的 GitHub 用户名
     const repo = 'ml_temp';  // 仓库名
     const path = 'topics';  // 目录路径
-    
-    fetchGitHubRepoContents(owner, repo, path)
-        .then(data => {
-            // 生成目录 HTML
-            const navHtml = generateNavFromGitHubData(data);
-            // 渲染到页面中的目录区域
-            document.getElementById('directory-list').innerHTML = navHtml;
-        });
+
+    try {
+        const data = await fetchGitHubRepoContents(owner, repo, path);
+        // 生成目录 HTML
+        const navHtml = await generateNavFromGitHubData(owner, repo, path, data);
+        // 渲染到页面中的目录区域
+        document.getElementById('directory-list').innerHTML = navHtml;
+    } catch (error) {
+        console.error('加载目录时出错:', error);
+        document.getElementById('directory-list').innerHTML = '<p>无法加载目录内容</p>';
+    }
 }
+
 
 // 获取 GitHub 仓库内容
 function fetchGitHubRepoContents(owner, repo, path, branch = 'gh-pages') {
@@ -152,7 +156,8 @@ function fetchGitHubRepoContents(owner, repo, path, branch = 'gh-pages') {
 
 
 
-function generateNavFromGitHubData(data) {
+// 递归渲染目录和文件
+async function generateNavFromGitHubData(owner, repo, path, data) {
     // 确保返回的是数组
     if (!Array.isArray(data)) {
         console.error('返回的数据不是数组', data);
@@ -160,23 +165,32 @@ function generateNavFromGitHubData(data) {
     }
 
     // 递归生成导航
-    return data.map(item => {
+    const navHtml = await Promise.all(data.map(async (item) => {
         if (item.type === 'dir') {  // 如果是目录
             const encodedPath = encodeURIComponent(item.name); // 对目录名称进行 URL 编码
-            const subDirPath = `topics/${encodedPath}`;  // 拼接目录路径
+            const subDirPath = `${path}/${encodedPath}`;  // 拼接完整的目录路径
+
+            // 获取该目录的内容并继续递归
+            const subData = await fetchGitHubRepoContents(owner, repo, subDirPath);
+            const subNavHtml = await generateNavFromGitHubData(owner, repo, subDirPath, subData);
+
             return `
                 <li>
-                    <div class="directory-item" onclick="toggleSubDirectory('${encodedPath}')">${item.name}</div>
-                    <ul id="sub-${encodedPath}" class="subdirectory" style="display: none;">
-                        ${generateNavFromGitHubData(item._embedded?.contents || [])}  <!-- 递归加载子目录 -->
+                    <div class="directory-item" onclick="toggleSubDirectory('${subDirPath}')">${item.name}</div>
+                    <ul id="sub-${subDirPath}" class="subdirectory" style="display: none;">
+                        ${subNavHtml}
                     </ul>
                 </li>
             `;
-        } else if (item.type === 'file') {  // 如果是文件
-            return `<li><a href="${item.download_url}" target="_blank">${item.name}</a></li>`;
+        } else if (item.type === 'file' && item.name.endsWith('.md')) {  // 如果是 Markdown 文件
+            return `<li><a href="#" onclick="loadMarkdown('${item.download_url}')">${item.name}</a></li>`;
         }
-    }).join('');
+    }));
+
+    return navHtml.join('');
 }
+
+
 
 // 切换子目录显示
 function toggleSubDirectory(path) {
