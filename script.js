@@ -90,7 +90,7 @@ function renderDirectoryNavigation() {
 
 // 获取 GitHub 仓库内容
 function fetchGitHubRepoContents(owner, repo, path) {
-    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/${path}`;
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=gh-pages`;
 
     return fetch(apiUrl)
         .then(response => {
@@ -105,8 +105,13 @@ function fetchGitHubRepoContents(owner, repo, path) {
         });
 }
 
-// 递归生成目录结构
 function generateNavFromGitHubData(data) {
+    // 确保 data 是一个数组
+    if (!Array.isArray(data)) {
+        console.error('API 返回的数据不是数组', data);
+        return '';  // 返回空字符串或一个默认的错误内容
+    }
+
     return data.map(item => {
         if (item.type === 'dir') {  // 如果是目录
             return `
@@ -120,6 +125,7 @@ function generateNavFromGitHubData(data) {
         }
     }).join('');
 }
+
 
 function processMarkdownImages(markdownContent, currentFilePath) {
     // 打印调试信息，确认函数是否被调用
