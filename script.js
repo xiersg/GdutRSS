@@ -102,7 +102,8 @@ function loadMarkdown(filePath) {
         })
         .then(markdown => {
             // 处理 Markdown 中的路径
-            markdown = processMarkdownLinks(markdown, filePath);
+            markdown = processMarkdownImages(markdown, filePath);
+            //markdown = processMarkdownLinks(markdown, filePath);
 
             // 使用 marked.js 渲染 Markdown 内容
             document.getElementById('content').innerHTML = marked.parse(markdown);
@@ -189,7 +190,7 @@ function toggleSubDirectory(path) {
 
 
 
-// 暂时废弃
+
 function processMarkdownImages(markdownContent, currentFilePath) {
     // 打印调试信息，确认函数是否被调用
     console.log("processMarkdownImages 被触发");
