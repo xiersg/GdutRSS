@@ -1,18 +1,21 @@
 /* 基本样式 */
-body {
+body,html {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333;
     margin: 0;
     padding: 0;
     display: flex;
+    height: 100%;
+    width: 100%;
 }
 
 /* 整个页面容器 */
 .container {
-    max-width: 1200px;  /* 最大宽度 */
+    padding-top: 50px;
     margin: 0 auto;
     width: 100%;
+    height: 100%;
     padding: 20px;
 }
 
@@ -31,16 +34,27 @@ footer {
 
 /* Markdown 内容区域 */
 #content {
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    max-width: 900px;  /* 最大宽度 */
-    width: 100%;
+    margin-left: 300px;         /* 留出左侧目录空间 */
+    padding: 20px;              /* 内容内边距 */
+    flex-grow: 1;               /* 在 Flexbox 中扩展以填充剩余空间 */
+    max-width: 100%;            /* 最大宽度 100% */
+    width: 100%;                /* 容器占满父容器的宽度 */
+    max-height: 80vh;           /* 最大高度限制为视口的 80% */
+    overflow-y: auto;           /* 当内容超出容器时，显示垂直滚动条 */
+    box-sizing: border-box;     /* 包括内边距和边框 */
+    background-color: #fff;     /* 背景颜色为白色 */
+    border-radius: 8px;         /* 圆角效果 */
+    margin-top: 40px;           /* 与工具栏保持 60px 的间距，可以根据需要调整 */
 }
 
-/* 目录栏样式 */
+#content img {
+    max-width: 100%;   /* 图片最大宽度为 100% */
+    max-height: 500px; /* 图片最大高度为 500px，可以根据需要调整 */
+    display: block;    /* 去除图片下方的空白间隙 */
+    margin: 0 auto;    /* 图片居中显示 */
+}
+
+
 .content-container {
     display: flex;
     width: 100%;
@@ -53,19 +67,10 @@ footer {
     padding: 10px;
     position: fixed;
     height: 100%;
-    top: 0;
+    top: 30px;  /* 目录栏从工具栏下面开始 */
     left: 0;
     box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-}
-
-
-/* 分隔条样式 */
-.resizer {
-    background-color: #aaa;  /* 适中的颜色 */
-    cursor: ew-resize;  /* 左右拖动光标 */
-    width: 0px; /* 分隔条的宽度 */
-    height: 100%;
 }
 
 /* 目录项的样式 */
@@ -99,13 +104,6 @@ footer {
     /*border-bottom: 1px solid #ccc; /* 添加文件分割线 */
 }
 
-/* 主体布局 */
-#content {
-    margin-left: 270px; /* 留出左侧目录空间 */
-    padding: 20px;
-    flex-grow: 1;
-}
-
 /* 夜间模式样式 */
 body.night-mode {
     background-color: rgb(30, 30, 30);  /* 稍微亮一点的深灰色背景 */
@@ -123,12 +121,10 @@ body.night-mode #navigation {
 }
 
 body.night-mode button {
-    background-color: rgb(58, 61, 65);  /* 按钮背景色 */
     color: rgb(212, 212, 212);  /* 按钮文字颜色 */
-    border: 1px solid rgb(58, 61, 65);  /* 按钮边框颜色 */
-    padding: 10px 15px;
     border-radius: 4px;
 }
+
 
 body.night-mode button:hover {
     background-color: rgb(77, 77, 79);  /* 鼠标悬停时的按钮背景色 */
@@ -157,6 +153,15 @@ body.night-mode a:visited {
 body.night-mode .file-item {
     background-color: rgb(60, 60, 60);  /* 深灰色背景 */
     color: rgb(212, 212, 212);  /* 文字颜色 */
+}
+
+body.night-mode .toolbar {
+    background-color: rgb(60, 60, 60);  /* 工具栏背景色变暗 */
+}
+
+body.night-mode #content {
+    background-color: rgb(65, 65, 65);  /* 内容区域背景色变暗 */
+    color: rgb(212, 212, 212);  /* 修改文字颜色，确保与背景有对比 */
 }
 
 /* 白天模式样式 */
@@ -207,3 +212,38 @@ body a:hover {
 body a:visited {
     color: rgb(138, 138, 255);  /* 设置已访问链接的颜色 */
 }
+
+/* 工具栏样式 */
+.toolbar {
+    display: flex;
+    justify-content: space-between; /* 左右对齐 */
+    align-items: center;           /* 垂直居中对齐 */
+    height: 40px;                  /* 工具栏高度 */
+    padding: 0 20px;               /* 左右内边距 */
+    background-color: #fff;        /* 背景色 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* 阴影效果 */
+    font-size: 1.2em;
+    width: 100%;                   /* 工具栏宽度占满整个页面 */
+    position: fixed;               /* 固定在页面顶部 */
+    top: 0;                        /* 顶部对齐 */
+    left: 0;                       /* 左边对齐 */
+    z-index: 1000;                 /* 确保工具栏在最前面 */
+}
+
+.title {
+    font-weight: bold;
+}
+
+.theme-toggle {
+    font-size: 1.5em;
+    padding: 8px 12px;   /* 调整按钮的内边距，确保按钮大小合适 */
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: inline-flex; /* 使按钮内容水平对齐 */
+    align-items: center;  /* 垂直居中按钮内容 */
+    justify-content: center;
+    height: 30px;         /* 按钮高度，使其与工具栏高度一致 */
+    margin-right: 20px;
+}
+

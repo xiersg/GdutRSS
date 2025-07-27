@@ -3,54 +3,6 @@ const resizer = document.getElementById('resizer');
 const navigation = document.getElementById('navigation');
 const content = document.getElementById('content');
 
-// 监听鼠标拖动事件
-let isResizing = false;
-let lastDownX = 0;
-
-resizer.addEventListener('mousedown', (e) => {
-    isResizing = true;
-    lastDownX = e.clientX;
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', () => {
-        isResizing = false;
-        document.removeEventListener('mousemove', handleMouseMove);
-    });
-});
-
-function handleMouseMove(e) {
-    if (!isResizing) return;
-
-    const offsetLeft = e.clientX;  // 当前鼠标位置
-    const newWidth = offsetLeft;   // 新的宽度是鼠标点击的位置
-
-    // 限制目录栏宽度的范围
-    if (newWidth > 100 && newWidth < document.documentElement.clientWidth - 100) {
-        navigation.style.width = `${newWidth}px`;  // 设置目录栏宽度
-        content.style.marginLeft = `${newWidth + 10}px`;  // 为内容区留出空间
-    }
-}
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // 加载并渲染 Markdown 文件
-    fetch('index.md')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('无法加载 index.md 文件');
-            }
-            return response.text();
-        })
-        .then(markdown => {
-            // 使用 marked.js 渲染 Markdown 内容
-            document.getElementById('content').innerHTML = marked.parse(markdown);
-        })
-        .catch(error => {
-            document.getElementById('content').innerHTML = `<p>加载文件时出错：${error.message}</p>`;
-        });
-});
 
 document.addEventListener('DOMContentLoaded', function() {
     // 初始加载首页的 Markdown 文件
@@ -59,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 监听页面上所有的链接点击事件
     document.getElementById('content').addEventListener('click', function(event) {
         const target = event.target;
-        
+
         // 如果点击的是 <a> 标签，且链接是指向 Markdown 文件
         if (target.tagName === 'A' && target.getAttribute('href').endsWith('.md')) {
             event.preventDefault();  // 阻止默认的跳转行为
@@ -73,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 夜间模式切换按钮事件
     const toggleNightModeBtn = document.getElementById('toggle-night-mode');
-    
+
     // 检查本地存储中的设置
     if (localStorage.getItem('theme') === 'night') {
         document.body.classList.add('night-mode');
@@ -81,15 +33,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     toggleNightModeBtn.addEventListener('click', () => {
         document.body.classList.toggle('night-mode');
-        
+
         // 保存用户的主题选择到本地存储
         if (document.body.classList.contains('night-mode')) {
             localStorage.setItem('theme', 'night');
         } else {
             localStorage.setItem('theme', 'day');
         }
+
+        // 更新按钮显示的 emoji
+        if (document.body.classList.contains('night-mode')) {
+            toggleNightModeBtn.textContent = '🌙'; // 切换到夜间模式时显示🌙
+        } else {
+            toggleNightModeBtn.textContent = '☀️'; // 切换到白天模式时显示☀️
+        }
     });
 });
+
 
 // 加载并渲染 Markdown 文件的函数
 function loadMarkdown(filePath) {
