@@ -64,21 +64,23 @@ footer {
 .resizer {
     background-color: #aaa;  /* 适中的颜色 */
     cursor: ew-resize;  /* 左右拖动光标 */
-    width: 10px; /* 分隔条的宽度 */
+    width: 0px; /* 分隔条的宽度 */
     height: 100%;
 }
 
-/* 目录项样式 */
+/* 目录项的样式 */
 .directory-item {
     cursor: pointer;
     font-weight: bold;
     margin: 5px 0;
-    color: rgb(212, 212, 212); /* 确保在夜间模式下文字清晰 */
+    color: rgb(112, 112, 112); /* 确保在夜间模式下文字清晰 */
+    padding-bottom: 5px;  /* 保留间距，可以调整 */
 }
 
 .directory-item:hover {
     color: #007BFF;  /* 鼠标悬停时的目录项颜色 */
 }
+
 /* 展开子目录 */
 .subdirectory {
     padding-left: 20px;
@@ -88,6 +90,13 @@ footer {
 
 .subdirectory li {
     margin: 5px 0;
+}
+
+/* 文件项样式 */
+.file-item {
+    padding-left: 40px;  /* 缩进文件项 */
+    background-color: #f9f9f9;  /* 可以使用不同的背景色区分文件项 */
+    /*border-bottom: 1px solid #ccc; /* 添加文件分割线 */
 }
 
 /* 主体布局 */
@@ -145,10 +154,10 @@ body.night-mode a:visited {
     color: rgb(138, 138, 255);  /* 设置已访问链接的颜色 */
 }
 
-
-
-
-
+body.night-mode .file-item {
+    background-color: rgb(60, 60, 60);  /* 深灰色背景 */
+    color: rgb(212, 212, 212);  /* 文字颜色 */
+}
 
 /* 白天模式样式 */
 body {
@@ -198,4 +207,3 @@ body a:hover {
 body a:visited {
     color: rgb(138, 138, 255);  /* 设置已访问链接的颜色 */
 }
-

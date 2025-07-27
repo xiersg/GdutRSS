@@ -133,6 +133,7 @@ async function renderDirectoryNavigation() {
 }
 
 
+
 // 获取 GitHub 仓库内容
 function fetchGitHubRepoContents(owner, repo, path, branch = 'gh-pages') {
     const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
@@ -158,32 +159,34 @@ function fetchGitHubRepoContents(owner, repo, path, branch = 'gh-pages') {
 
 // 递归渲染目录和文件
 async function generateNavFromGitHubData(owner, repo, path, data) {
-    // 确保返回的是数组
     if (!Array.isArray(data)) {
         console.error('返回的数据不是数组', data);
         return '<p>无法加载目录内容。</p>';
     }
 
-    // 递归生成导航
     const navHtml = await Promise.all(data.map(async (item) => {
         if (item.type === 'dir') {  // 如果是目录
-            const encodedPath = encodeURIComponent(item.name); // 对目录名称进行 URL 编码
+            const encodedPath = encodeURIComponent(item.name);  // 对目录名称进行 URL 编码
             const subDirPath = `${path}/${encodedPath}`;  // 拼接完整的目录路径
 
-            // 获取该目录的内容并继续递归
+            // 递归获取该目录的内容并返回 HTML
             const subData = await fetchGitHubRepoContents(owner, repo, subDirPath);
             const subNavHtml = await generateNavFromGitHubData(owner, repo, subDirPath, subData);
 
             return `
-                <li>
-                    <div class="directory-item" onclick="toggleSubDirectory('${subDirPath}')">${item.name}</div>
+                <li class="directory-item">
+                    <div class="directory-name" onclick="toggleSubDirectory('${subDirPath}')">${item.name}</div>
                     <ul id="sub-${subDirPath}" class="subdirectory" style="display: none;">
                         ${subNavHtml}
                     </ul>
                 </li>
             `;
         } else if (item.type === 'file' && item.name.endsWith('.md')) {  // 如果是 Markdown 文件
-            return `<li><a href="#" onclick="loadMarkdown('${item.download_url}')">${item.name}</a></li>`;
+            return `
+                <li class="file-item">
+                    <a href="#" onclick="loadMarkdown('${item.download_url}')">${item.name}</a>
+                </li>
+            `;
         }
     }));
 
