@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Markdown 阅读器</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- Markdown 转换库 -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Markdown 阅读器</title>
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Markdown 渲染库 -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- ✅ Highlight.js 样式（可换主题） -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.css"
+  />
+
+  <!-- ✅ Highlight.js 浏览器专用脚本（修复了你的问题） -->
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/build/highlight.min.js"></script>
+
+  <!-- 自定义脚本 -->
+  <script defer src="script.js"></script>
 </head>
 <body>
     <div class="container">
