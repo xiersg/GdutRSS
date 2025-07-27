@@ -19,4 +19,5 @@
 
 ## 链接跳转
 
-[尝试跳转到一篇教程--RAG](topics/大模型/RAG/RAG基础.md)
+[查看教程文件夹](https://github.com/xiersg/ml_temp/tree/gh-pages/topics)
+[网页所在](https://xiersg.github.io/ml_temp)
