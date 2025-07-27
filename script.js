@@ -15,3 +15,108 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('content').innerHTML = `<p>加载文件时出错：${error.message}</p>`;
         });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 初始加载首页的 Markdown 文件
+    loadMarkdown('index.md');
+
+    // 监听页面上所有的链接点击事件
+    document.getElementById('content').addEventListener('click', function(event) {
+        const target = event.target;
+        
+        // 如果点击的是 <a> 标签，且链接是指向 Markdown 文件
+        if (target.tagName === 'A' && target.getAttribute('href').endsWith('.md')) {
+            event.preventDefault();  // 阻止默认的跳转行为
+            const href = target.getAttribute('href');
+            loadMarkdown(href);  // 加载对应的 Markdown 文件
+        }
+    });
+
+    // 获取并渲染目录结构
+    renderDirectoryNavigation();
+
+    // 夜间模式切换按钮事件
+    const toggleNightModeBtn = document.getElementById('toggle-night-mode');
+    
+    // 检查本地存储中的设置
+    if (localStorage.getItem('theme') === 'night') {
+        document.body.classList.add('night-mode');
+    }
+
+    toggleNightModeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('night-mode');
+        
+        // 保存用户的主题选择到本地存储
+        if (document.body.classList.contains('night-mode')) {
+            localStorage.setItem('theme', 'night');
+        } else {
+            localStorage.setItem('theme', 'day');
+        }
+    });
+});
+
+// 加载并渲染 Markdown 文件的函数
+function loadMarkdown(filePath) {
+    fetch(filePath)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('无法加载文件');
+            }
+            return response.text();
+        })
+        .then(markdown => {
+            // 使用 marked.js 渲染 Markdown 内容
+            document.getElementById('content').innerHTML = marked.parse(markdown);
+        })
+        .catch(error => {
+            document.getElementById('content').innerHTML = `<p>加载文件时出错：${error.message}</p>`;
+        });
+}
+
+// 获取并渲染目录
+function renderDirectoryNavigation() {
+    const owner = 'xiersg';  // 你的 GitHub 用户名
+    const repo = 'ml_temp';  // 仓库名
+    const path = 'topics';  // 目录路径
+    
+    fetchGitHubRepoContents(owner, repo, path)
+        .then(data => {
+            // 生成目录 HTML
+            const navHtml = generateNavFromGitHubData(data);
+            // 渲染到页面中的目录区域
+            document.getElementById('directory-list').innerHTML = navHtml;
+        });
+}
+
+// 获取 GitHub 仓库内容
+function fetchGitHubRepoContents(owner, repo, path) {
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
+    return fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('无法加载 GitHub 仓库内容');
+            }
+            return response.json();
+        })
+        .then(data => data)
+        .catch(error => {
+            console.error('GitHub API 请求失败:', error);
+        });
+}
+
+// 递归生成目录结构
+function generateNavFromGitHubData(data) {
+    return data.map(item => {
+        if (item.type === 'dir') {  // 如果是目录
+            return `
+                <div>
+                    <h3>${item.name}</h3>
+                    <ul>${generateNavFromGitHubData(item._embedded.contents || [])}</ul>
+                </div>
+            `;
+        } else if (item.type === 'file') {  // 如果是文件
+            return `<li><a href="${item.download_url}" target="_blank">${item.name}</a></li>`;
+        }
+    }).join('');
+}

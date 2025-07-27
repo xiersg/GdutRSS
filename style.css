@@ -35,3 +35,75 @@ footer {
     text-align: center;
     font-size: 1.2em;
 }
+
+/* 日间模式 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.content-container {
+    display: flex;
+}
+
+#navigation {
+    width: 200px;
+    padding-right: 20px;
+}
+
+.content {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.loader {
+    text-align: center;
+    font-size: 1.2em;
+}
+
+/* 夜间模式 */
+body.night-mode {
+    background-color: #121212;
+    color: #f1f1f1;
+}
+
+body.night-mode .content {
+    background-color: #333;
+}
+
+body.night-mode #navigation {
+    background-color: #1a1a1a;
+    color: #f1f1f1;
+}
+
+body.night-mode button {
+    background-color: #444;
+    color: #fff;
+}
+
+body.night-mode button:hover {
+    background-color: #666;
+}
+
+
