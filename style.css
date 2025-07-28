@@ -54,6 +54,12 @@ footer {
     margin: 0 auto;    /* 图片居中显示 */
 }
 
+/* 调整代码块的字体大小 */
+pre code {
+    font-size: 1.2em; /* 可以根据需要调整大小 */
+    font-weight: 600; /* 设置字体为粗体 */
+    line-height: 1.6; /* 行间距*/
+}
 
 .content-container {
     display: flex;

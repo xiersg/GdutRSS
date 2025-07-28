@@ -67,6 +67,10 @@ function loadMarkdown(filePath) {
 
             // 使用 marked.js 渲染 Markdown 内容
             document.getElementById('content').innerHTML = marked.parse(markdown);
+
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
         })
         .catch(error => {
             document.getElementById('content').innerHTML = `<p>加载文件时出错：${error.message}</p>`;
