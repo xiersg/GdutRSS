@@ -20,4 +20,4 @@
 ## 链接跳转
 
 [查看教程文件夹](https://github.com/xiersg/ml_temp/tree/gh-pages/topics)
-[网页所在](https://xiersg.github.io/ml_temp)
+[网页所在](https://xiersg.github.io/GdutRSS)
