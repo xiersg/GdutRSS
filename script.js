@@ -81,7 +81,7 @@ function loadMarkdown(filePath) {
 // 获取并渲染目录
 async function renderDirectoryNavigation() {
     const owner = 'xiersg';  // 你的 GitHub 用户名
-    const repo = 'ml_temp';  // 仓库名
+    const repo = 'GdutRSS';  // 仓库名
     const path = 'topics';  // 目录路径
 
     try {
