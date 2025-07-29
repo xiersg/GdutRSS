@@ -18,16 +18,16 @@
   {
     "name": "directory.json",
     "path": "directory.json",
-    "sha": "1faf3fc8432c1baec9979847878489d1d4e250ed",
+    "sha": "2828b18897fa8d0cf66b579dc2d705b88725e824",
     "size": 7360,
     "url": "https://api.github.com/repos/xiersg/GdutRSS/contents/directory.json?ref=gh-pages",
     "html_url": "https://github.com/xiersg/GdutRSS/blob/gh-pages/directory.json",
-    "git_url": "https://api.github.com/repos/xiersg/GdutRSS/git/blobs/1faf3fc8432c1baec9979847878489d1d4e250ed",
+    "git_url": "https://api.github.com/repos/xiersg/GdutRSS/git/blobs/2828b18897fa8d0cf66b579dc2d705b88725e824",
     "download_url": "https://raw.githubusercontent.com/xiersg/GdutRSS/gh-pages/directory.json",
     "type": "file",
     "_links": {
       "self": "https://api.github.com/repos/xiersg/GdutRSS/contents/directory.json?ref=gh-pages",
-      "git": "https://api.github.com/repos/xiersg/GdutRSS/git/blobs/1faf3fc8432c1baec9979847878489d1d4e250ed",
+      "git": "https://api.github.com/repos/xiersg/GdutRSS/git/blobs/2828b18897fa8d0cf66b579dc2d705b88725e824",
       "html": "https://github.com/xiersg/GdutRSS/blob/gh-pages/directory.json"
     }
   },
