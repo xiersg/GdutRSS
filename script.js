@@ -79,7 +79,7 @@ function loadMarkdown(filePath) {
 
 
 // 获取并渲染目录
-async function renderDirectoryNavigation() {
+async function renderDirectoryNavigation22222() {
     try {
         const response = await fetch('directory.json');
         if (!response.ok) {
@@ -89,6 +89,24 @@ async function renderDirectoryNavigation() {
 
         // 生成目录 HTML
         const navHtml = await generateNavFromGitHubData(data);
+        // 渲染到页面中的目录区域
+        document.getElementById('directory-list').innerHTML = navHtml;
+    } catch (error) {
+        console.error('加载目录时出错:', error);
+        document.getElementById('directory-list').innerHTML = '<p>无法加载目录内容</p>';
+    }
+}
+
+// 获取并渲染目录
+async function renderDirectoryNavigation() {
+    const owner = 'xiersg';  // 你的 GitHub 用户名
+    const repo = 'GdutRSS';  // 仓库名
+    const path = 'topics';  // 目录路径
+
+    try {
+        const data = await fetchGitHubRepoContents(owner, repo, path);
+        // 生成目录 HTML
+        const navHtml = await generateNavFromGitHubData(owner, repo, path, data);
         // 渲染到页面中的目录区域
         document.getElementById('directory-list').innerHTML = navHtml;
     } catch (error) {
