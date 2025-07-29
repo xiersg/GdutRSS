@@ -1,0 +1,20 @@
+{
+  "name": "gdutrss",
+  "version": "1.0.0",
+  "description": "GitHub repository directory fetcher for gh-pages",
+  "main": "index.js",  // 你的入口文件
+  "scripts": {
+    "start": "node fetch-directory.js",  // 执行你的 fetch-directory.js 文件
+    "update-directory": "node fetch-directory.js"  // 你也可以定义其他脚本命令
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1",  // 用来从 GitHub 获取目录数据
+    "fs": "^0.0.1"           // 如果你需要处理文件系统（通常 Node.js 会自带）
+  },
+  "devDependencies": {
+    // 如果有开发依赖的话，可以列在这里
+  },
+  "type": "module",  // 启用 ES Module (import/export)
+  "author": "Your Name",
+  "license": "MIT"
+}

@@ -1,5 +1,5 @@
-const fetch = require('node-fetch');
-const fs = require('fs');
+import fetch from 'node-fetch';  // 使用 import 导入 node-fetch
+import fs from 'fs';             // 使用 import 导入 fs 模块
 
 // GitHub API 请求配置
 const owner = 'xiersg';  // 你的 GitHub 用户名
