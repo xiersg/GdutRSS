@@ -2,48 +2,40 @@ name: Update Directory JSON
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # 每小时执行一次
-
+    - cron: '*/5 * * * *'  # 每 5 分钟运行一次
+  workflow_dispatch:  # 允许手动触发
   push:
     branches:
-      - gh-pages  # 触发工作流的分支，改为其他分支也可以
-  workflow_dispatch:  # 支持手动触发
-    inputs:
-      trigger_message:
-        description: 'Message to trigger this workflow'
-        required: false
+      - gh-pages  # 修改为触发的源分支，如果需要
 
 jobs:
   update-directory:
-    runs-on: ubuntu-latest  # 使用 GitHub 提供的 Ubuntu 环境
+    runs-on: ubuntu-latest
 
     steps:
-      # 1. 检出代码
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages  # 拉取 gh-pages 分支以写入 directory.json
 
-      # 2. 配置 Git 用户信息
-      - name: Set up Git configuration
+      - name: Configure Git
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
 
-      # 3. 设置 Git 远程 URL 使用 PAT
-      - name: Set up git remote to use PAT
+      - name: Set remote using PAT_TOKEN
         run: |
           git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}.git
 
-      # 4. 获取目录信息并保存为 JSON 文件
-      - name: Fetch directory from GitHub API
+      - name: Fetch GitHub directory structure
         run: |
           curl -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
                -H "Accept: application/vnd.github.v3+json" \
                "https://api.github.com/repos/${{ github.repository }}/contents?ref=gh-pages" \
                > directory.json
 
-      # 5. 提交并推送更新到 `main` 分支
-      - name: Commit and push updated directory.json to main
+      - name: Commit and push directory.json
         run: |
           git add directory.json
           git commit -m "Update directory JSON"
-          git push origin gh-pages  # 如果需要推送到其他分支，修改分支名
+          git push origin gh-pages
