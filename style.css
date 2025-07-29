@@ -34,7 +34,7 @@ footer {
 
 /* Markdown 内容区域 */
 #content {
-    margin-left: 12%;         /* 留出左侧目录空间 */
+    margin-left: 3%;         /* 留出左侧目录空间 */
     padding: 20px;              /* 内容内边距 */
     flex-grow: 1;               /* 在 Flexbox 中扩展以填充剩余空间 */
     max-width: 100%;            /* 最大宽度 100% */
