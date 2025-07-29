@@ -16,6 +16,22 @@
     }
   },
   {
+    "name": "directory.json",
+    "path": "directory.json",
+    "sha": "577142bc8f1410080b28b3aa2593efc982af13a5",
+    "size": 6502,
+    "url": "https://api.github.com/repos/xiersg/GdutRSS/contents/directory.json?ref=gh-pages",
+    "html_url": "https://github.com/xiersg/GdutRSS/blob/gh-pages/directory.json",
+    "git_url": "https://api.github.com/repos/xiersg/GdutRSS/git/blobs/577142bc8f1410080b28b3aa2593efc982af13a5",
+    "download_url": "https://raw.githubusercontent.com/xiersg/GdutRSS/gh-pages/directory.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/xiersg/GdutRSS/contents/directory.json?ref=gh-pages",
+      "git": "https://api.github.com/repos/xiersg/GdutRSS/git/blobs/577142bc8f1410080b28b3aa2593efc982af13a5",
+      "html": "https://github.com/xiersg/GdutRSS/blob/gh-pages/directory.json"
+    }
+  },
+  {
     "name": "fetch-directory.js",
     "path": "fetch-directory.js",
     "sha": "a2596c8c4da2f6a106f9f7980e3fb3a71b4db58d",
