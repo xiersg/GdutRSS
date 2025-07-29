@@ -1,8 +1,5 @@
 name: Update Directory JSON
 
-permissions:
-  contents: write
-
 on:
   schedule:
     - cron: '*/5 * * * *'  # 每 5 分钟运行一次
@@ -10,6 +7,9 @@ on:
   push:
     branches:
       - gh-pages  # 修改为触发的源分支
+
+permissions:
+  contents: write   # 给 GitHub Actions 写入仓库内容的权限
 
 jobs:
   update-directory:
@@ -20,7 +20,7 @@ jobs:
       - name: Checkout gh-pages branch
         uses: actions/checkout@v3
         with:
-          ref: gh-pages  # 拉取 gh-pages 分支以写入 directory.json
+          ref: gh-pages  # 拉取 gh-pages 分支
 
       # 步骤2：设置 Node.js 环境
       - name: Set up Node.js
