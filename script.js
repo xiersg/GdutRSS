@@ -168,10 +168,6 @@ function toggleSubDirectory(path) {
 }
 
 
-
-
-
-
 function processMarkdownImages(markdownContent, currentFilePath) {
     // 打印调试信息，确认函数是否被调用
     console.log("processMarkdownImages 被触发");
@@ -203,3 +199,56 @@ function processMarkdownImages(markdownContent, currentFilePath) {
     });
 }
 
+
+const resizer = document.getElementById('sidebar-resizer');
+const navigation = document.getElementById('navigation');
+const contentContainer = document.querySelector('.content-container');
+let isResizing = false;
+
+// 鼠标按下开始拖动
+resizer.addEventListener('mousedown', (e) => {
+    isResizing = true;
+    document.body.style.cursor = 'col-resize';
+    document.addEventListener('mousemove', resize);
+    document.addEventListener('mouseup', stopResize);
+    e.preventDefault();
+});
+
+// 调整宽度
+function resize(e) {
+    if (!isResizing) return;
+    const containerRect = contentContainer.getBoundingClientRect();
+    const newWidth = e.clientX - containerRect.left;
+    // 限制最小宽度150px，最大宽度600px
+    if (newWidth >= 150 && newWidth <= 600) {
+        navigation.style.width = `${newWidth}px`;
+    }
+}
+
+// 停止拖动
+function stopResize() {
+    isResizing = false;
+    document.body.style.cursor = '';
+    document.removeEventListener('mousemove', resize);
+    document.removeEventListener('mouseup', stopResize);
+}
+
+// 触摸设备支持
+resizer.addEventListener('touchstart', (e) => {
+    isResizing = true;
+    e.preventDefault();
+}, { passive: false });
+
+document.addEventListener('touchmove', (e) => {
+    if (!isResizing) return;
+    const containerRect = contentContainer.getBoundingClientRect();
+    const newWidth = e.touches[0].clientX - containerRect.left;
+    if (newWidth >= 150 && newWidth <= 600) {
+        navigation.style.width = `${newWidth}px`;
+    }
+    e.preventDefault();
+}, { passive: false });
+
+document.addEventListener('touchend', () => {
+    isResizing = false;
+});

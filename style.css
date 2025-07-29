@@ -71,7 +71,7 @@ pre code {
 #navigation {
     width: 10%;
     padding: 10px;
-    position: fixed;
+    /*position: fixed;*/
     height: 100%;
     top: 50px;
     left: 0;
@@ -255,3 +255,15 @@ body a:visited {
     margin-right: 20px;
 }
 
+/* 拖动条样式 */
+.resizer {
+    width: 5px;
+    background-color: #ccc;
+    cursor: col-resize;
+    user-select: none;
+    transition: background-color 0.2s;
+}
+
+.resizer:hover {
+    background-color: #666;
+}
