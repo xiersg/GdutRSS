@@ -1,5 +1,8 @@
 name: Update Directory JSON
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: '*/5 * * * *'  # 每 5 分钟运行一次
