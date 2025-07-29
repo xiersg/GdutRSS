@@ -1,0 +1,41 @@
+name: Update Directory JSON
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 每小时的第一个分钟触发
+
+  push:
+    branches:
+      - gh-pages  # 仅当推送到 `gh-pages` 分支时触发
+
+  workflow_dispatch:  # 手动触发
+    inputs:
+      trigger_message:
+        description: 'Message to trigger this workflow'
+        required: false
+
+jobs:
+  update-directory:
+    runs-on: ubuntu-latest  # 使用 GitHub 提供的 Ubuntu 最新环境
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Git configuration
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Fetch directory from GitHub API
+        run: |
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               -H "Accept: application/vnd.github.v3+json" \
+               "https://api.github.com/repos/xiersg/GdutRSS/contents/topics?ref=gh-pages" \
+               > directory.json
+
+      - name: Commit and push updated directory.json to gh-pages
+        run: |
+          git add directory.json
+          git commit -m "Update directory JSON"
+          git push origin gh-pages
