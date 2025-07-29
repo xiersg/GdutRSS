@@ -79,7 +79,7 @@ function loadMarkdown(filePath) {
 
 
 // 获取并渲染目录
-async function renderDirectoryNavigation22222() {
+async function renderDirectoryNavigation() {
     try {
         const response = await fetch('directory.json');
         if (!response.ok) {
@@ -98,7 +98,7 @@ async function renderDirectoryNavigation22222() {
 }
 
 // 获取并渲染目录
-async function renderDirectoryNavigation() {
+async function renderDirectoryNavigation222() {
     const owner = 'xiersg';  // 你的 GitHub 用户名
     const repo = 'GdutRSS';  // 仓库名
     const path = 'topics';  // 目录路径
