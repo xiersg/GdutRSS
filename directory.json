@@ -1,0 +1,130 @@
+[
+  {
+    "type": "dir",
+    "name": ".github",
+    "path": ".github",
+    "content": [
+      {
+        "type": "dir",
+        "name": "workflows",
+        "path": ".github/workflows",
+        "content": []
+      }
+    ]
+  },
+  {
+    "type": "file",
+    "name": "index.md",
+    "download_url": "https://raw.githubusercontent.com/xiersg/GdutRSS/gh-pages/index.md"
+  },
+  {
+    "type": "dir",
+    "name": "topics",
+    "path": "topics",
+    "content": [
+      {
+        "type": "dir",
+        "name": "AAA广工美食",
+        "path": "topics/AAA广工美食",
+        "content": [
+          {
+            "type": "dir",
+            "name": "imgs",
+            "path": "topics/AAA广工美食/imgs",
+            "content": []
+          },
+          {
+            "type": "file",
+            "name": "广工美食.md",
+            "download_url": "https://raw.githubusercontent.com/xiersg/GdutRSS/gh-pages/topics/AAA广工美食/广工美食.md"
+          }
+        ]
+      },
+      {
+        "type": "dir",
+        "name": "应用方向",
+        "path": "topics/应用方向",
+        "content": [
+          {
+            "type": "dir",
+            "name": "图像处理-cv",
+            "path": "topics/应用方向/图像处理-cv",
+            "content": [
+              {
+                "type": "file",
+                "name": "diffusion极简化版代码解读.md",
+                "download_url": "https://raw.githubusercontent.com/xiersg/GdutRSS/gh-pages/topics/应用方向/图像处理-cv/diffusion极简化版代码解读.md"
+              }
+            ]
+          },
+          {
+            "type": "dir",
+            "name": "大模型",
+            "path": "topics/应用方向/大模型",
+            "content": [
+              {
+                "type": "dir",
+                "name": "RAG",
+                "path": "topics/应用方向/大模型/RAG",
+                "content": [
+                  {
+                    "type": "file",
+                    "name": "RAG基础.md",
+                    "download_url": "https://raw.githubusercontent.com/xiersg/GdutRSS/gh-pages/topics/应用方向/大模型/RAG/RAG基础.md"
+                  }
+                ]
+              },
+              {
+                "type": "dir",
+                "name": "大模型微调",
+                "path": "topics/应用方向/大模型/大模型微调",
+                "content": [
+                  {
+                    "type": "file",
+                    "name": "index.md",
+                    "download_url": "https://raw.githubusercontent.com/xiersg/GdutRSS/gh-pages/topics/应用方向/大模型/大模型微调/index.md"
+                  },
+                  {
+                    "type": "file",
+                    "name": "任务适应微调.md",
+                    "download_url": "https://raw.githubusercontent.com/xiersg/GdutRSS/gh-pages/topics/应用方向/大模型/大模型微调/任务适应微调.md"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "dir",
+            "name": "自然语言处理-nlp",
+            "path": "topics/应用方向/自然语言处理-nlp",
+            "content": []
+          }
+        ]
+      },
+      {
+        "type": "dir",
+        "name": "数据分析",
+        "path": "topics/数据分析",
+        "content": []
+      },
+      {
+        "type": "dir",
+        "name": "深度学习原理",
+        "path": "topics/深度学习原理",
+        "content": []
+      },
+      {
+        "type": "dir",
+        "name": "通用架构",
+        "path": "topics/通用架构",
+        "content": [
+          {
+            "type": "file",
+            "name": "transfomer重读.md",
+            "download_url": "https://raw.githubusercontent.com/xiersg/GdutRSS/gh-pages/topics/通用架构/transfomer重读.md"
+          }
+        ]
+      }
+    ]
+  }
+]
