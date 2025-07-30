@@ -2,7 +2,7 @@ name: Update Directory JSON
 
 on:
   schedule:
-    - cron: '0 * * * *'  # 每 60 分钟运行一次
+    - cron: '0 * * * *'  # 每 5 分钟运行一次
   workflow_dispatch:  # 允许手动触发
   push:
     branches:
@@ -16,40 +16,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 步骤 1：Checkout gh-pages 分支
+      # 步骤1：Checkout gh-pages 分支
       - name: Checkout gh-pages branch
         uses: actions/checkout@v3
         with:
-          ref: gh-pages  # 拉取 gh-pages 分支以更新 topics 目录
+          ref: gh-pages  # 拉取 gh-pages 分支以写入 directory.json
 
-      # 步骤 2：设置 Node.js 环境
+      # 步骤2：设置 Node.js 环境
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '14'
 
-      # 步骤 3：安装依赖
+      # 步骤3：安装依赖（node-fetch）
       - name: Install dependencies
         run: |
           npm install node-fetch
 
-      # 步骤 4：配置 Git
+      # 步骤4：配置 Git
       - name: Configure Git
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
 
-      # 步骤 5：设置 Git 远程访问，使用 PAT Token
+      # 步骤5：设置 Git 远程访问，使用 PAT Token
       - name: Set remote using PAT_TOKEN
         run: |
           git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}.git
 
-      # 步骤 6：运行脚本来获取 GitHub 仓库目录结构并保存为 directory.json
+      # 步骤6：运行脚本来获取 GitHub 仓库目录结构并保存为 directory.json
       - name: Fetch GitHub directory structure
         run: |
-          node fetch-directory.js  # 运行 Node.js 脚本来递归获取 topics 目录
+          node fetch-directory.js  # 运行 Node.js 脚本来递归获取目录
 
-      # 步骤 7：提交并推送 directory.json 文件
+      # 步骤7：提交并推送 directory.json 文件
       - name: Commit and push directory.json
         run: |
           git add directory.json

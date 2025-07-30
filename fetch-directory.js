@@ -4,7 +4,6 @@ import fs from 'fs';             // 使用 import 导入 fs 模块
 const owner = 'xiersg';  // GitHub 用户名
 const repo = 'GdutRSS';  // 仓库名
 const branch = 'gh-pages';  // 仓库分支
-const path = 'topics';  // 指定的目录路径
 const baseUrl = `https://api.github.com/repos/${owner}/${repo}/contents`;
 
 // 递归获取 GitHub 仓库目录
@@ -44,7 +43,7 @@ async function fetchGitHubRepoContents(path = '') {
 // 主执行函数，生成目录 JSON 文件
 async function generateDirectoryJson() {
     try {
-        const data = await fetchGitHubRepoContents(path);  // 获取 topics 目录下的内容
+        const data = await fetchGitHubRepoContents('');
         fs.writeFileSync('directory.json', JSON.stringify(data, null, 2), 'utf8');
         console.log('directory.json 文件已生成！');
     } catch (error) {
