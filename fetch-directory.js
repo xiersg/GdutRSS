@@ -1,10 +1,9 @@
 import fetch from 'node-fetch';  // 使用 import 导入 node-fetch
 import fs from 'fs';             // 使用 import 导入 fs 模块
 
-// GitHub API 请求配置
-const owner = 'xiersg';  // 你的 GitHub 用户名
+const owner = 'xiersg';  // GitHub 用户名
 const repo = 'GdutRSS';  // 仓库名
-const branch = 'gh-pages';  // 要访问的分支
+const branch = 'gh-pages';  // 仓库分支
 const baseUrl = `https://api.github.com/repos/${owner}/${repo}/contents`;
 
 // 递归获取 GitHub 仓库目录

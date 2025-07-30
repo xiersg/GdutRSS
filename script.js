@@ -78,7 +78,7 @@ function loadMarkdown(filePath) {
 }
 
 
-// 获取并渲染目录
+// 加载并渲染目录文件
 async function renderDirectoryNavigation() {
     try {
         const response = await fetch('directory.json');
@@ -96,25 +96,6 @@ async function renderDirectoryNavigation() {
         document.getElementById('directory-list').innerHTML = '<p>无法加载目录内容</p>';
     }
 }
-
-// 获取并渲染目录
-async function renderDirectoryNavigation222() {
-    const owner = 'xiersg';  // 你的 GitHub 用户名
-    const repo = 'GdutRSS';  // 仓库名
-    const path = 'topics';  // 目录路径
-
-    try {
-        const data = await fetchGitHubRepoContents(owner, repo, path);
-        // 生成目录 HTML
-        const navHtml = await generateNavFromGitHubData(owner, repo, path, data);
-        // 渲染到页面中的目录区域
-        document.getElementById('directory-list').innerHTML = navHtml;
-    } catch (error) {
-        console.error('加载目录时出错:', error);
-        document.getElementById('directory-list').innerHTML = '<p>无法加载目录内容</p>';
-    }
-}
-
 
 
 
@@ -142,7 +123,7 @@ function fetchGitHubRepoContents(owner, repo, path, branch = 'gh-pages') {
 
 
 // 递归渲染目录和文件
-async function generateNavFromGitHubData(owner, repo, path, data) {
+async function generateNavFromGitHubData(data) {
     if (!Array.isArray(data)) {
         console.error('返回的数据不是数组', data);
         return '<p>无法加载目录内容。</p>';
@@ -150,17 +131,11 @@ async function generateNavFromGitHubData(owner, repo, path, data) {
 
     const navHtml = await Promise.all(data.map(async (item) => {
         if (item.type === 'dir') {  // 如果是目录
-            const encodedPath = encodeURIComponent(item.name);  // 对目录名称进行 URL 编码
-            const subDirPath = `${path}/${encodedPath}`;  // 拼接完整的目录路径
-
-            // 递归获取该目录的内容并返回 HTML
-            const subData = await fetchGitHubRepoContents(owner, repo, subDirPath);
-            const subNavHtml = await generateNavFromGitHubData(owner, repo, subDirPath, subData);
-
+            const subNavHtml = await generateNavFromGitHubData(item.content);  // 递归生成子目录
             return `
                 <li class="directory-item">
-                    <div class="directory-name" onclick="toggleSubDirectory('${subDirPath}')">${item.name}</div>
-                    <ul id="sub-${subDirPath}" class="subdirectory" style="display: none;">
+                    <div class="directory-name" onclick="toggleSubDirectory('${item.path}')">${item.name}</div>
+                    <ul id="sub-${item.path}" class="subdirectory" style="display: none;">
                         ${subNavHtml}
                     </ul>
                 </li>
