@@ -4,7 +4,7 @@ import fs from 'fs';             // 使用 import 导入 fs 模块
 const owner = 'xiersg';  // GitHub 用户名
 const repo = 'GdutRSS';  // 仓库名
 const branch = 'gh-pages';  // 仓库分支
-const baseUrl = `https://api.github.com/repos/${owner}/${repo}/contents`;
+const baseUrl = `https://api.github.com/repos/${owner}/${repo}/contents/topics`;
 
 // 递归获取 GitHub 仓库目录
 async function fetchGitHubRepoContents(path = '') {
