@@ -87,8 +87,11 @@ async function renderDirectoryNavigation() {
         }
         const data = await response.json();
 
+        // 过滤掉不属于 topics 目录的数据
+        const filteredData = data.filter(item => item.path && item.path.startsWith('topics/'));
+
         // 生成目录 HTML
-        const navHtml = await generateNavFromGitHubData(data);
+        const navHtml = await generateNavFromGitHubData(filteredData);
         // 渲染到页面中的目录区域
         document.getElementById('directory-list').innerHTML = navHtml;
     } catch (error) {
@@ -96,6 +99,7 @@ async function renderDirectoryNavigation() {
         document.getElementById('directory-list').innerHTML = '<p>无法加载目录内容</p>';
     }
 }
+
 
 
 

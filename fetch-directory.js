@@ -4,12 +4,13 @@ import fs from 'fs';             // 使用 import 导入 fs 模块
 const owner = 'xiersg';  // GitHub 用户名
 const repo = 'GdutRSS';  // 仓库名
 const branch = 'gh-pages';  // 仓库分支
-const path = 'topics';  // 目录路径
-const baseUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`; // 直接访问 topics 目录
+const baseUrl = `https://api.github.com/repos/${owner}/${repo}/contents`;
 
-// 获取 GitHub 仓库内容
-async function fetchGitHubRepoContents() {
-    const response = await fetch(baseUrl);
+// 递归获取 GitHub 仓库目录
+async function fetchGitHubRepoContents(path = '') {
+    const apiUrl = `${baseUrl}/${path}?ref=${branch}`;
+
+    const response = await fetch(apiUrl);
     const data = await response.json();
 
     if (!Array.isArray(data)) {
@@ -42,7 +43,7 @@ async function fetchGitHubRepoContents() {
 // 主执行函数，生成目录 JSON 文件
 async function generateDirectoryJson() {
     try {
-        const data = await fetchGitHubRepoContents();
+        const data = await fetchGitHubRepoContents('');
         fs.writeFileSync('directory.json', JSON.stringify(data, null, 2), 'utf8');
         console.log('directory.json 文件已生成！');
     } catch (error) {
