@@ -107,7 +107,7 @@ pre code {
 
 /* 文件项样式 */
 .file-item {
-    padding-left: 40px;  /* 缩进文件项 */
+    padding-left: 0px;  /* 缩进文件项 */
     background-color: #f9f9f9;  /* 可以使用不同的背景色区分文件项 */
     /*border-bottom: 1px solid #ccc; /* 添加文件分割线 */
 }
